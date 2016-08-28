@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+  <html>
+    <head>
+      
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title>InkStorms Registration Form</title>
+      
+    </head>
+
+    <body background="img/ink.png">
+	
+    <nav>
+          <div class="nav-wrapper indigo lighten-3">
+            
+            <a href="index.html" class="brand-logo center">InkStorm Dehradun</a><br>
+            
+           </div>
+
+    </nav>
+    
+    <div class="container">
+	
+    <div class="card-panel brown lighten-5 center">For any queries mail us a <a href="mailto:inkstorms.doon@gmail.com">inkstorms.doon@gmail.com</a> or contact +91-7895049979.The cost of registration for students is Rs50 and Rs100 for others.</div>
+            	
+    <div class="container center-align">
+      <div class="row center">
+        <form class="col s12 z-depth-3 light-green lighten-5" method="POST" action="test.php" id="form" style="margin-top:3%">
+          <div class="row">
+          <div class="input-field col s6">
+              <i class="material-icons prefix">account_circle</i>
+              <input id="fname" type="text" class="validate" name="fname" required>
+              <label for="fname">First Name</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="lname" type="text" class="validate" name="lname" >
+              <label for="lname">Last Name</label>
+            </div>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">email</i>
+              <input id="email" type="email" class="validate" name="email" required>
+              <label for="email">Email</label>
+            </div>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">phone</i>
+              <input id="phone" type="tel" class="validate" name="phone" required>
+              <label for="phone">Mobile No.</label>
+            </div>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">work</i>
+              <input id="campus" type="text" class="validate" name="campus" required>
+              <label for="campus">Campus/Locality/Company</label>
+            </div>
+            
+			
+            <div class="input-field col s12">
+				<i class="material-icons prefix">assignment</i>
+			  <textarea id="textarea1" class="materialize-textarea" name="address" required></textarea>
+			  <label for="textarea1">Address</label>
+			</div>
+            <div class="col s12"><p style="padding:10px">Are You A Student?</p></div>
+            <div class="col s12 "> 
+				<p class="col s6">
+				  <input name="stu" type="radio" id="test1" required value="Yes"/>
+				  <label for="test1">Yes</label>
+				</p>
+				<p class="col s6">
+				  <input name="stu" type="radio" id="test2" required value="No"/>
+				  <label for="test2">No</label>
+				</p>
+			</div>
+            <div class="input-field col s12 center">
+              <button class="btn waves-effect waves-light" type="submit" name="action">Submit <i class="material-icons right">send</i>
+              </button>
+            </div>
+		</div>
+        </form>
+      </div>
+      </div>
+      </div>
+      <div class="row"></div>
+      
+      <footer class="page-footer indigo lighten-3">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Notice</h5>
+                <p class="grey-text text-lighten-4">Students need to bring their ID cards on final day.</p>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container center">
+            Designed And Developed By
+            <a class="grey-text text-lighten-4" href="http://amitphulera.com">Amit Phulera</a>
+            </div>
+          </div>
+      </footer>
+            
+		  
+      <div id="modala" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <h4>Sucessfully Registered!!!</h4>
+          <p>Confirmation mail send</p></div>
+          <div class="modal-footer">
+				<a class="center btn modal-action modal-close waves-effect waves-green">Okay</a>
+			</div>
+		</div>
+      </div>
+      <div id="modalx" class="modal modal-fixed-footer">
+        <div class="modal-content center">
+          <h4>Email Already Registered!!!</h4>
+        </div>
+			<div class="modal-footer center">
+				<a class="center btn modal-action modal-close waves-effect waves-green" style="overflow:hidden">Okay</a>
+			</div>
+	</div>
+            
+      
+      <script type="text/javascript" src="js/jq.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+     <script>
+        $(document).ready(function() {
+          $('select').material_select();
+        });
+      </script> 
+     
+      
+     <script>
+
+      $('#form').submit(function(e) {
+        $.ajax({
+              type: "POST",
+              url: "test.php",
+              data: $(this).serialize(),
+              success:function(data){
+                        var res = JSON.parse(data);
+                        if(res.stat==="farzi")
+                        {
+                          document.getElementById("form").reset();
+                          $('#modalx').openModal();
+                        }
+                        if(res.stat==="false")
+                        {
+                          $('#modal').openModal();
+                        }
+                        else{
+                          if(res.stat==="reg")
+                          {
+                            document.getElementById("form").reset();
+                            $('#modala').openModal();
+
+                          }
+                        }
+              },
+            });
+             e.preventDefault(); 
+        });
+     </script>
+    </body>
+  </html>
+        
