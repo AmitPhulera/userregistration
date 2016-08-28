@@ -1,9 +1,9 @@
 <?php
 class db_controller{
-	private $host ="mysql.hostinger.in";
-	private $user ="u197534677_amit";
-	private $password ="aphulera3318";
-	private $database = "u197534677_ink";
+	private $host ="";
+	private $user ="";
+	private $password ="";
+	private $database = "";
 	public $conn;
 
 	function __construct() {
